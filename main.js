@@ -1,6 +1,10 @@
 const response = await fetch('./initial_books.json');
 const books = await response.json();
 const myLibrary = books;
+//
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("#showDialog");
+const cancelButton = document.querySelector("#cancel");
 
 function Book(author, title, pagesNumber, isRead) {
   this.author = author;
@@ -22,6 +26,7 @@ submit.onclick = () => {
 
   addBookToLibrary(author,title,pagesNumber,isRead);
   showBooks([myLibrary[myLibrary.length - 1]]);
+  dialog.close();
 };
 
 function showBooks(library) {
@@ -38,5 +43,11 @@ function showBooks(library) {
     lib.appendChild(content);
   });
 }
+
+showButton.addEventListener("click", () => {
+  dialog.showModal();
+})
+
+cancelButton.addEventListener("click", () => dialog.close());
 
 showBooks(myLibrary);
