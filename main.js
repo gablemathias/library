@@ -19,6 +19,10 @@ function addBookToLibrary(author,title,pagesNumber,isRead) {
   myLibrary.push(new Book(author,title,pagesNumber,isRead));
 }
 
+function removeSpaces(str){
+  return str.replace(/ /g, ""); // replace every match - Regex
+}
+
 submit.onclick = () => {
   const author = document.querySelector("#author").value
   const title = document.querySelector("#title").value
@@ -33,15 +37,16 @@ submit.onclick = () => {
 function showBooks(library) {
   const lib = document.querySelector("#library");
   library.forEach(book => {
+    let noSpacesTitle = removeSpaces(book.title);
     // console.log(book);
     let content = document.createElement("div");
     let val = document.createAttribute("class");
-    val.value = `${book.title}`;
+    val.value = noSpacesTitle;
     content.setAttributeNode(val);
 
     let removeBook = document.createElement("button");
     let attrRemoveBook = document.createAttribute("class");
-    attrRemoveBook.value = `removeButton-${book.title}`;
+    attrRemoveBook.value = `removeButton-${noSpacesTitle}`;
     removeBook.setAttributeNode(attrRemoveBook);
     removeBook.innerHTML = "Delete";
 
