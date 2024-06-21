@@ -40,13 +40,13 @@ function showBooks(library) {
     let noSpacesTitle = removeSpaces(book.title);
     // console.log(book);
     let content = document.createElement("div");
-    let val = document.createAttribute("class");
+    let val = document.createAttribute("data-title");
     val.value = noSpacesTitle;
     content.setAttributeNode(val);
 
     let removeBook = document.createElement("button");
     let attrRemoveBook = document.createAttribute("class");
-    attrRemoveBook.value = `removeButton-${noSpacesTitle}`;
+    attrRemoveBook.value = "remove-button";
     removeBook.setAttributeNode(attrRemoveBook);
     removeBook.innerHTML = "Delete";
 
