@@ -2,6 +2,8 @@ const response = await fetch('./initial_books.json');
 const books = await response.json();
 const myLibrary = books;
 //
+const submit = document.querySelector("#submit");
+//
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("#showDialog");
 const cancelButton = document.querySelector("#cancel");
@@ -16,7 +18,6 @@ function Book(author, title, pagesNumber, isRead) {
 function addBookToLibrary(author,title,pagesNumber,isRead) {
   myLibrary.push(new Book(author,title,pagesNumber,isRead));
 }
-const submit = document.querySelector("#submit");
 
 submit.onclick = () => {
   const author = document.querySelector("#author").value
@@ -34,6 +35,16 @@ function showBooks(library) {
   library.forEach(book => {
     // console.log(book);
     let content = document.createElement("div");
+    let val = document.createAttribute("class");
+    val.value = `${book.title}`;
+    content.setAttributeNode(val);
+
+    let removeBook = document.createElement("button");
+    let attrRemoveBook = document.createAttribute("class");
+    attrRemoveBook.value = `removeButton-${book.title}`;
+    removeBook.setAttributeNode(attrRemoveBook);
+    removeBook.innerHTML = "Delete";
+
     content.innerText = `
     Title: ${book.title}
     Author: ${book.author}
@@ -41,6 +52,7 @@ function showBooks(library) {
     Read: ${book.isRead}
     `
     lib.appendChild(content);
+    content.appendChild(removeBook);
   });
 }
 
